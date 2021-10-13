@@ -1,0 +1,31 @@
+@startuml
+class Scene{}
+class BorderPane{}
+
+class HautBorderPane{}
+class Label1{}
+
+class CentreBorderPane{}
+class BorderPaneBlocActivite{}
+class Label2{}
+class CarreGris{}
+
+class BasBorderPane{}
+class Label3{}
+class Button{}
+
+
+Scene --> BorderPane
+BorderPane --> HautBorderPane
+
+HautBorderPane --> Label1
+
+BorderPane --> CentreBorderPane
+CentreBorderPane --> BorderPaneBlocActivite
+BorderPaneBlocActivite --> Label2
+BorderPaneBlocActivite --> CarreGris
+
+BorderPane --> BasBorderPane
+BasBorderPane --> Label3
+BasBorderPane --> Button
+@enduml

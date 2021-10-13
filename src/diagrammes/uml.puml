@@ -1,0 +1,225 @@
+@startuml
+class EcouteurVuePointDeControleIG {
+- MondeIG monde
+- PointDeControleIG pt
++ void handle(MouseEvent)
+}
+class Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+abstract class EtapeIG {
+- String nom
+- String identifiant
+- int posX
+- int posY
+- int largeur
+- int hauteur
+- ArrayList<PointDeControleIG> pdcigs
+# int delais
+# int ecart
++ void setDelais(String)
++ void setEcart(String)
++ Iterator<PointDeControleIG> iterator()
++ String getNom()
++ String getIdentifiant()
++ void setPosX(int)
++ void setPosY(int)
++ void setNom(String)
++ int getPosX()
++ int getPosY()
++ int getLargeur()
++ int getHauteur()
++ ArrayList<PointDeControleIG> getPdcigs()
++ String toString()
+}
+abstract class VueEtapeIG {
+# MondeIG monde
+# EtapeIG etapeIG
+# Label label
++ void reagir()
+}
+class VueArcIG {
+- MondeIG monde
+- ArcIG arc
+- boolean select
+- Line l
+- Polyline p
++ void selectionnerArc(MouseEvent)
++ void reagir()
+}
+abstract class SujetObserve {
+# ArrayList<Observateur> obs
++ {abstract}void ajouterObservateur(Observateur)
++ {abstract}void notifierObservateurs()
+}
+class FabriqueIdentifiant {
+~ int noEtape
+~ int noArc
+- {static} FabriqueIdentifiant instance
++ {static} FabriqueIdentifiant getInstance()
++ String getIdentifiantEtape()
++ String getIdentifiantArc()
+}
+class MondeIGTest {
+~ void testConstruct()
+~ void testAjouter()
+}
+class VueAlert {
+~ MondeIG monde
+~ String message
++ void reagir()
+}
+abstract class TwiskException {
+}
+class PointDeControleIG {
+- int posCentreX
+- int posCentreY
+- String id
+- EtapeIG e
++ int getPosCentreX()
++ int getPosCentreY()
++ void setPosCentreX(int)
++ void setPosCentreY(int)
++ String getId()
++ EtapeIG getEtapeIG()
+}
+class ActiviteIG {
+}
+class FabriqueIdentifiantTest {
+~ void testConstruct()
+~ void testIncrementation()
+}
+class VueMenu {
+- MondeIG monde
+- Menu fichier
+- MenuItem quitter
+- Menu edition
+- MenuItem supprimerSelection
+- MenuItem renomer
+- MenuItem effacerSelection
+- Menu mondeMenu
+- MenuItem entree
+- MenuItem sortie
+- Menu param
+- MenuItem d
+- MenuItem e
++ void reagir()
+}
+class SetDelaiEcart {
+}
+class MondeIG {
+- HashMap<String,EtapeIG> etapesIG
+- ArrayList<ArcIG> arcs
+- ArrayList<EtapeIG> activiteSelectionnees
+- ArrayList<ArcIG> arcSelectionnees
+- PointDeControleIG p1
+- EtapeIG e
+- ArrayList<EtapeIG> sorties
+- ArrayList<EtapeIG> entrees
++ void ajouterObservateur(Observateur)
++ void ajouter(String)
++ void ajouterArc(PointDeControleIG)
++ void renommerActivite(String)
++ EtapeIG getEtapeById(String)
++ void ajouterSortie()
++ void setDelais(String)
++ void setEcart(String)
++ void ajouterEntree()
++ void supprimerSelection()
++ void effacerSelection()
++ void ajouterActiviteSelection(EtapeIG)
++ void ajouterArcSelection(ArcIG)
++ void retirerArcSelection(ArcIG)
++ void notifierObservateurs()
++ ArrayList<EtapeIG> getActiviteSelectionnees()
++ ArrayList<ArcIG> getArcs()
++ Iterator<EtapeIG> iterator()
++ Iterator<ArcIG> iteratorArc()
++ String toString()
+}
+class VueMondeIG {
+- MondeIG monde
+- EtapeIG e
++ void reagir()
+}
+class TailleComposants {
+- {static} TailleComposants instance
+~ int largeur
+~ int hauteur
+~ int hauteurLabel
+~ int fleche
++ {static} TailleComposants getInstance()
++ int getHauteur()
++ int getLargeur()
++ int getHauteurLabel()
++ int getFleche()
+}
+class VuePointDeControleIG {
+- MondeIG monde
+- PointDeControleIG pt
++ void reagir()
+}
+class MemeClasse {
+}
+class ArcIG {
+- PointDeControleIG p1
+- PointDeControleIG p2
+- String id
++ PointDeControleIG getP1()
++ PointDeControleIG getP2()
++ String getIdentifiant()
++ String toString()
+}
+class PointDeControleIGTest {
+~ void testConstructeur()
+}
+class VueActiviteIG {
+- Label label
+- boolean select
++ void selectionnerActivite(MouseEvent)
+}
+class ActiviteIGTest {
+~ void setUp()
+}
+class EtapeIGTest {
+}
+class VueOutils {
+- MondeIG monde
+- Button button
++ void reagir()
+}
+class PointsIdentiques {
+}
+interface Observateur {
+~ void reagir()
+}
+
+
+javafx.event.EventHandler <|.. twisk.mondeIG.EcouteurVuePointDeControleIG
+javafx.application.Application <|-- sample.Main
+twisk.mondeIG.Iterable <|.. twisk.mondeIG.EtapeIG
+twisk.vues.Observateur <|.. twisk.vues.VueEtapeIG
+javafx.scene.layout.VBox <|-- twisk.vues.VueEtapeIG
+twisk.vues.Observateur <|.. twisk.vues.VueArcIG
+javafx.scene.layout.Pane <|-- twisk.vues.VueArcIG
+twisk.vues.Observateur <|.. twisk.vues.VueAlert
+javafx.scene.control.Alert <|-- twisk.vues.VueAlert
+twisk.exceptions.Exception <|-- twisk.exceptions.TwiskException
+twisk.mondeIG.EtapeIG <|-- twisk.mondeIG.ActiviteIG
+twisk.vues.Observateur <|.. twisk.vues.VueMenu
+twisk.vues.MenuBar <|-- twisk.vues.VueMenu
+twisk.exceptions.TwiskException <|-- twisk.exceptions.SetDelaiEcart
+twisk.mondeIG.Iterable <|.. twisk.mondeIG.MondeIG
+twisk.vues.SujetObserve <|-- twisk.mondeIG.MondeIG
+twisk.vues.Observateur <|.. twisk.vues.VueMondeIG
+javafx.scene.layout.Pane <|-- twisk.vues.VueMondeIG
+twisk.vues.Observateur <|.. twisk.vues.VuePointDeControleIG
+javafx.scene.shape.Circle <|-- twisk.vues.VuePointDeControleIG
+twisk.exceptions.TwiskException <|-- twisk.exceptions.MemeClasse
+twisk.vues.Observateur <|.. twisk.vues.VueActiviteIG
+twisk.vues.VueEtapeIG <|-- twisk.vues.VueActiviteIG
+twisk.vues.Observateur <|.. twisk.vues.VueOutils
+javafx.scene.layout.TilePane <|-- twisk.vues.VueOutils
+twisk.exceptions.TwiskException <|-- twisk.exceptions.PointsIdentiques
+@enduml

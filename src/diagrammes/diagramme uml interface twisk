@@ -1,0 +1,18 @@
+@startuml
+class Simulation{}
+interface Observateur{}
+class EcouteurBouton implements EventHandler{}
+Class EventHandler{}
+class VueSimulation implements Observateur{}
+class VueAjouter implements Observateur{}
+class VueSimulation extends BorderPane{}
+class VueAjouter extends VBox{}
+class Label{}
+class Button{}
+
+
+Simulation "1" -- "*" Observateur
+Simulation "1" -- EcouteurBouton
+VueSimulation -- "*" Label
+VueAjouter -- "1" Button
+@enduml
